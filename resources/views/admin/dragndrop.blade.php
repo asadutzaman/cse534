@@ -57,6 +57,11 @@
         </div>
 
         <script>
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            //     }
+            // });
 $(document).ready(function(){
 
 
@@ -71,6 +76,7 @@ $(document).ready(function(){
     url:"{{ route('chatbot.store') }}",
     method:"POST",
     data: new FormData(this),
+    // data: {"_token": "{{ csrf_token() }}","id": id,"label": label, "answer":answer, "next_action":next_action},
     contentType: false,
     cache:false,
     processData: false,

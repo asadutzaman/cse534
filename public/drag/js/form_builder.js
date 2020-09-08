@@ -88,27 +88,27 @@ $(document).ready(function () {
                             </div>\
                         </div>\
                     </div><hr/>\
+                    <div class="row">\
                     <div class="row li_row form_output" data-type="text" data-field="' + field + '">\
                         <form method="post" id="sample_form" class="form-horizontal" enctype="multipart/form-data">\
-                           \
                             <div class="col-md-12">\
                                 <div class="form-group">\
-                                    <input type="text" name="label_' + field + '" class="form-control form_input_label" value="Label" data-field="' + field + '"/>\
+                                    <input type="text" name="label" class="form-control form_input_label" value="Label"/>\
                                 </div>\
                             </div>\
                             <div class="col-md-12">\
                                 <div class="form-group">\
-                                    <input type="text" name="placeholder_' + field + '" data-field="' + field + '" class="form-control form_input_placeholder" placeholder="Answer"/>\
+                                    <input type="text" name="answer" class="form-control form_input_placeholder" placeholder="Answer"/>\
                                 </div>\
                             </div>\
                             <div class="col-md-12">\
                                 <div class="form-group">\
                                     <div class="form-group col-md-12">\
                                         <label for="inputState">Next Action</label>\
-                                        <select id="inputState" class="form-control">\
-                                            <option selected>Yes</option>\
-                                            <option>Image</option>\
-                                            <option>No Action</option>\
+                                        <select name="next_action" id="inputState" class="form-control">\
+                                            <option value="yes">Yes</option>\
+                                            <option value="image">Image</option>\
+                                            <option value="no">No Action</option>\
                                         </select>\
                                     </div>\
                                 </div>\
@@ -117,6 +117,7 @@ $(document).ready(function () {
                                 <input type="submit" name="action_button" id="action_button" class="btn btn-warning" value="Add" />\
                             </div>\
                         </form>\
+                        </div>\
                     </div>';
         return $('<div>').addClass('li_' + field + ' form_builder_field').html(html);
     }

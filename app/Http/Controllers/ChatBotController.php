@@ -37,6 +37,28 @@ class ChatBotController extends Controller
     public function store(Request $request)
     {
         dd($request);
+        $rules = array(
+            'label'    =>  'required',
+            'answer'     =>  'required',
+            'next_action'         =>  'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'label'        =>  $request->label,
+            'answer'         =>  $request->answer,
+            'next_action'             =>  $new_name
+        );
+
+        ChatBot::create($form_data);
+
+        return response()->json(['success' => 'Data Added successfully.']);
         //
     }
 
