@@ -105,17 +105,28 @@
                           <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
                           <label class='control-label'>Placeholder</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
                           <label class='control-label'>Help Text</label> <input type='text' name='help' id='help' class='form-control'>
-                          <hr/>
-                          <button class='btn btn-info' id='1' onClick='reply_click(this.id)'>Save</button><button class='btn btn-danger'>Cancel</button>
+                          
                         </div>
+                        <div id='dynamic_field'></div>
+
+                        <hr/>
+                          <button class='btn btn-info' id='1'>Save</button><button class='btn btn-danger'>Cancel</button>
+                          <button type='button' id='add' onClick='reply_click(this.id)' class='btn btn-success'>Add More</button>
+
+                        
+                      </div>
                       </form>" data-html="true" 
                       >
-					  <script type="text/javascript">
-						  function reply_click(clicked_id)
-						  {
-							  alert(clicked_id);
-						  }
-						</script>
+                      <script type="text/javascript">
+                        function reply_click(clicked_id)
+                        {
+                          // alert(clicked_id);
+                          
+                          $('#add').click(function(){
+                            $('#dynamic_field').append('<label class="control-label">Label Text</label> <input class="form-control" type="text">');
+                          });
+                        }
+                      </script>
 
                       <!-- Text input-->
                       <label class="col-md-4 control-label valtype" for="input01" data-valtype='label'><button>Text input</button></label>
