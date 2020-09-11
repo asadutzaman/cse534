@@ -111,7 +111,7 @@
 
                         <hr/>
                           <button class='btn btn-info' id='1'>Save</button><button class='btn btn-danger'>Cancel</button>
-                          <button type='button' id='add' onClick='reply_click(this.id)' class='btn btn-success'>Add More</button>
+                          <button type='button' onClick='reply_click(this.id)' class='btn btn-success'>Add More</button>
 
                         
                       </div>
@@ -121,10 +121,8 @@
                         function reply_click(clicked_id)
                         {
                           // alert(clicked_id);
-                          
-                          $('#add').click(function(){
-                            $('#dynamic_field').append('<label class="control-label">Label Text</label> <input class="form-control" type="text">');
-                          });
+                          $('#dynamic_field').append('<label class="control-label">Label Text</label> <input class="form-control" type="text">');
+
                         }
                       </script>
 
