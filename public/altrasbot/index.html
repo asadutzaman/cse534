@@ -102,18 +102,17 @@
                       data-content="
                       <form class='form'>
                         <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Placeholder</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
-                          <label class='control-label'>Help Text</label> <input type='text' name='help' id='help' class='form-control'>
-                          
+                          <label class='control-label'>Node Name</label> <input class='form-control' type='text' name='label' id='label'>
+                          <label class='control-label'>Content</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
+                          <label class='control-label'>URL</label> <input type='text' name='help' id='help' class='form-control'>
+                          <label class='control-label'>Next Action</label> <input type='text' name='help' id='help' class='form-control'>
+                          <hr/>
                         </div>
                         <div id='dynamic_field'></div>
 
-                        <hr/>
                           <button class='btn btn-info' id='1'>Save</button><button class='btn btn-danger'>Cancel</button>
                           <button type='button' onClick='reply_click(this.id)' class='btn btn-success'>Add More</button>
 
-                        
                       </div>
                       </form>" data-html="true" 
                       >
@@ -121,7 +120,11 @@
                         function reply_click(clicked_id)
                         {
                           // alert(clicked_id);
-                          $('#dynamic_field').append('<label class="control-label">Label Text</label> <input class="form-control" type="text">');
+                          $('#dynamic_field').append('\
+                            <label class="control-label">Content</label> <input class="form-control" type="text">\
+                            <label class="control-label">URL</label> <input class="form-control" type="text">\
+                            <label class="control-label">Next Action</label> <input class="form-control" type="text"><hr/>\
+                          ');
 
                         }
                       </script>
