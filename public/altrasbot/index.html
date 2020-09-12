@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="一个基于Bootstrap3的表单创建器。" />
     <meta name="keywords" content="Bootstrap 3 Form Builder" />
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="js/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -105,7 +108,12 @@
                           <label class='control-label'>Node Name</label> <input class='form-control' type='text' name='label' id='label'>
                           <label class='control-label'>Content</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
                           <label class='control-label'>URL</label> <input type='text' name='help' id='help' class='form-control'>
-                          <label class='control-label'>Next Action</label> <input type='text' name='help' id='help' class='form-control'>
+                          <label class='control-label' id=''>Next Action: </label>
+                          <select class='form-control input-md' id='color'>
+                            <option>Yes</option>
+                            <option>No</option>
+                            <option>Pending</option>
+                          </select>
                           <hr/>
                         </div>
                         <div id='dynamic_field'></div>
@@ -123,14 +131,68 @@
                           $('#dynamic_field').append('\
                             <label class="control-label">Content</label> <input class="form-control" type="text">\
                             <label class="control-label">URL</label> <input class="form-control" type="text">\
-                            <label class="control-label">Next Action</label> <input class="form-control" type="text"><hr/>\
+                            <label class="control-label" id="">Next Action: </label>\
+                            <select class="form-control input-md">\
+                              <option>Yes</option>\
+                              <option>No</option>\
+                              <option>Pending</option>\
+                            </select><hr/>\
                           ');
 
                         }
                       </script>
 
                       <!-- Text input-->
-                      <label class="col-md-4 control-label valtype" for="input01" data-valtype='label'><button>Text input</button></label>
+                      <label class="col-md-4 control-label valtype" for="input01" data-valtype='label'><button>Text input <i class="fa fa-bars" aria-hidden="true"></i></button></label>
+                      <div class="col-md-4">
+                        <!--<input type="text" placeholder="placeholder" class="form-control input-md valtype" data-valtype="placeholder" >
+                        <p class="help-block valtype" data-valtype='help'>Supporting help text</p>-->
+                      </div>
+                    </div>
+
+                    <div class="form-group component" data-type="text" rel="popover" title="Text Input" trigger="manual"
+                      data-content="
+                      <form class='form'>
+                        <div class='form-group col-md-12'>
+                          <label class='control-label'>Node Name</label> <input class='form-control' type='text' name='label' id='label'>
+                          <label class='control-label'>Content</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
+                          <label class='control-label'>URL</label> <input type='text' name='help' id='help' class='form-control'>
+                          <label class='control-label' id=''>Next Action: </label>
+                          <select class='form-control input-md' id='color'>
+                            <option>Yes</option>
+                            <option>No</option>
+                            <option>Pending</option>
+                          </select>
+                          <hr/>
+                        </div>
+                        <div id='dynamic_field'></div>
+
+                          <button class='btn btn-info' id='1'>Save</button><button class='btn btn-danger'>Cancel</button>
+                          <button type='button' onClick='reply_click(this.id)' class='btn btn-success'>Add More</button>
+
+                      </div>
+                      </form>" data-html="true" 
+                      >
+                      <script type="text/javascript">
+                        function reply_click(clicked_id)
+                        {
+                          // alert(clicked_id);
+                          $('#dynamic_field').append('\
+                            <label class="control-label">Content</label> <input class="form-control" type="text">\
+                            <label class="control-label">URL</label> <input class="form-control" type="text">\
+                            <label class="control-label" id="">Next Action: </label>\
+                            <select class="form-control input-md">\
+                              <option>Yes</option>\
+                              <option>No</option>\
+                              <option>Pending</option>\
+                            </select><hr/>\
+                          ');
+
+                        }
+                      </script>
+
+                      <!-- Text input-->
+                      <label class="col-md-4 control-label valtype" for="input01" data-valtype='label'><button>Another input <i class="fa fa-bars" aria-hidden="true"></i></button></label>
                       <div class="col-md-4">
                         <!--<input type="text" placeholder="placeholder" class="form-control input-md valtype" data-valtype="placeholder" >
                         <p class="help-block valtype" data-valtype='help'>Supporting help text</p>-->
@@ -138,385 +200,8 @@
                     </div>
 
 
-                    <div class="form-group component" data-type="search" rel="popover" title="Search Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Placeholder</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
-                          <label class='control-label'>Help Text</label> <input type='text' name='help' id='help' class='form-control'>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true" 
-                      >
-
-                      <!-- Search input-->
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Search input</label>
-                      <div class="col-md-4">
-                        <input type="text" placeholder="placeholder" class="form-control input-md search-query valtype" data-valtype="placeholder">
-                        <p class="help-block valtype" data-valtype="help">Supporting help text</p>
-                      </div>
-
-                    </div>
-
-
-                    <div class="form-group component" data-type="prep-text" rel="popover" title="Prepended Text Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Prepend</label> <input type='text' name='prepend' id='prepend' class='form-control'>
-                          <label class='control-label'>Placeholder</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
-                          <label class='control-label'>Help Text</label> <input type='text' name='help' id='help' class='form-control'>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true" 
-                      >
-
-                      <!-- Prepended text-->
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Prepended text</label>
-                      <div class="col-md-4">
-                        <div class="input-group">
-                          <span class="input-group-addon valtype" data-valtype="prepend">^_^</span>
-                          <input class="form-control valtype" placeholder="placeholder" id="prependedInput" type="text" data-valtype="placeholder">
-                        </div>
-                        <p class="help-block valtype" data-valtype="help">Supporting help text</p>
-                      </div>
-
-                    </div>
-
-                    <div class="form-group component" data-type="app-text" rel="popover" title="Appended Text Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Appepend</label> <input type='text' name='append' id='append' class='form-control'>
-                          <label class='control-label'>Placeholder</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
-                          <label class='control-label'>Help Text</label> <input type='text' name='help' id='help' class='form-control'>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true" 
-                      >
-
-                      <!-- Appended input-->
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Appended text</label>
-                      <div class="col-md-4">
-                        <div class="input-group">
-                          <input name="appendedtext" class="form-control valtype" data-valtype="placeholder" placeholder="placeholder" type="text">
-                          <span class="input-group-addon valtype" data-valtype="append">^_^</span>
-                        </div>
-                        <p class="help-block valtype" data-valtype="help">Supporting help text</p>
-                      </div>
-
-
-                    </div>
-
-                    <div class="form-group component" rel="popover" title="Search Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Placeholder</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
-                          <label class='control-label'>Help Text</label> <input type='text' name='help' id='help' class='form-control'>
-                          <label class='checkbox'><input type='checkbox' class='input-inline' name='checked' id='checkbox'>Checked</label>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true" 
-                      >
-
-                      <!-- Prepended checkbox -->
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Prepended checkbox</label>
-                      <div class="col-md-4">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <input type="checkbox" class="valtype" data-valtype="checkbox">
-                          </span>
-                          <input class="form-control valtype" placeholder="placeholder" type="text" data-valtype="placeholder">
-                        </div>
-                        <p class="help-block valtype" data-valtype="help">Supporting help text</p>
-                      </div>
-
-                    </div>
-
-                    <div class="form-group component" rel="popover" title="Search Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Placeholder</label> <input type='text' name='placeholder' id='placeholder' class='form-control'>
-                          <label class='control-label'>Help Text</label> <input type='text' name='help' id='help' class='form-control'>
-                          <label class='checkbox'><input type='checkbox' class='input-inline' name='checked' id='checkbox'>Checked</label>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true" 
-                      >
-
-                      <!-- Appended checkbox -->
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Append checkbox</label>
-                      <div class="col-md-4">
-                        <div class="input-group">
-                          <input class="form-control valtype" placeholder="placeholder" type="text" data-valtype="placeholder">
-                          <span class="input-group-addon">
-                            <input type="checkbox" class="valtype" data-valtype="checkbox">
-                          </span>
-                        </div>
-                        <p class="help-block valtype" data-valtype="help">Supporting help text</p>
-                      </div>
-                    </div>
-
-                    <div class="form-group component" rel="popover" title="Search Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true" 
-                      >
-
-                      <!-- Textarea -->
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Textarea</label>
-                      <div class="col-md-4">
-                        <div class="textarea">
-                              <textarea class="form-control valtype" data-valtype="checkbox" /> </textarea>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="tab-pane" id="2">
-
-                    <div class="form-group component" rel="popover" title="Search Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Options: </label>
-                          <textarea class='form-control' style='min-height: 200px' id='option'> </textarea>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true"
-                      >
-
-                      <!-- Select Basic -->
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Select - Basic</label>
-                      <div class="col-md-4">
-                        <select class="form-control input-md valtype" data-valtype="option">
-                          <option>Enter</option>
-                          <option>Your</option>
-                          <option>Options</option>
-                          <option>Here!</option>
-                        </select>
-                      </div>
-
-                    </div>
-
-                    <div class="form-group component" rel="popover" title="Search Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Options: </label>
-                          <textarea class='form-control' style='min-height: 200px' id='option'></textarea>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true"
-                      >
-
-                      <!-- Select Multiple -->
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Select - Multiple</label>
-                      <div class="col-md-4">
-                        <select class="form-control input-md valtype" multiple="multiple" data-valtype="option">
-                          <option>Enter</option>
-                          <option>Your</option>
-                          <option>Options</option>
-                          <option>Here!</option>
-                        </select>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="tab-pane" id="3">
-
-                    <div class="form-group component" rel="popover" title="Multiple Checkboxes" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Options: </label>
-                          <textarea class='form-control' style='min-height: 200px' id='checkboxes'> </textarea>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true"
-                      >
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Checkboxes</label>
-                      <div class="col-md-4 valtype" data-valtype="checkboxes">
-
-                        <!-- Multiple Checkboxes -->
-                        <label class="checkbox">
-                          <input type="checkbox" value="Option one">
-                          Option one
-                        </label>
-                        <label class="checkbox">
-                          <input type="checkbox" value="Option two">
-                          Option two
-                        </label>
-                      </div>
-
-                    </div>
-
-                    <div class="form-group component" rel="popover" title="Multiple Radios" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Group Name Attribute</label> <input class='form-control' type='text' name='name' id='name'>
-                          <label class='control-label'>Options: </label>
-                          <textarea class='form-control' style='min-height: 200px' id='radios'></textarea>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true"
-                      >
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Radio buttons</label>
-                      <div class="col-md-4 valtype" data-valtype="radios">
-
-                        <!-- Multiple Radios -->
-                        <label class="radio">
-                          <input type="radio" value="Option one" name="group" checked="checked">
-                          Option one
-                        </label>
-                        <label class="radio">
-                          <input type="radio" value="Option two" name="group">
-                          Option two
-                        </label>
-                      </div>
-
-                    </div>
-
-                    <div class="form-group component" rel="popover" title="Inline Checkboxes" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <textarea class='form-control' style='min-height: 200px' id='inline-checkboxes'></textarea>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true"
-                      >
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Inline Checkboxes</label>
-
-                      <!-- Multiple Checkboxes -->
-                      <div class="col-md-4 valtype" data-valtype="inline-checkboxes">
-                        <label class="checkbox inline">
-                          <input type="checkbox" value="1"> 1
-                        </label>
-                        <label class="checkbox inline">
-                          <input type="checkbox" value="2"> 2
-                        </label>
-                        <label class="checkbox inline">
-                          <input type="checkbox" value="3"> 3
-                        </label>
-                      </div>
-
-                    </div>
-
-                    <div class="form-group component" rel="popover" title="Inline radioes" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Group Name Attribute</label> <input class='form-control' type='text' name='name' id='name'>
-                          <textarea class='form-control' style='min-height: 200px' id='inline-radios'></textarea>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true"
-                      >
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Inline radios</label>
-                      <div class="col-md-4 valtype" data-valtype="inline-radios">
-
-                        <!-- Inline Radios -->
-                        <label class="radio inline">
-                          <input type="radio" value="1" checked="checked" name="group">
-                          1
-                        </label>
-                        <label class="radio inline">
-                          <input type="radio" value="2" name="group">
-                          2
-                        </label>
-                        <label class="radio inline">
-                          <input type="radio" value="3">
-                          3
-                        </label>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="tab-pane" id="4">
-                    <div class="form-group component" rel="popover" title="File Upload" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true"
-                      >
-                      <label class="col-md-4 control-label valtype" data-valtype="label">File Button</label>
-
-                      <!-- File Upload -->
-                      <div class="col-md-4">
-                        <input class="input-file" id="fileInput" type="file">
-                      </div>
-                    </div>
-
-                    <div class="form-group component" rel="popover" title="Search Input" trigger="manual"
-                      data-content="
-                      <form class='form'>
-                        <div class='form-group col-md-12'>
-                          <label class='control-label'>Label Text</label> <input class='form-control' type='text' name='label' id='label'>
-                          <label class='control-label'>Button Text</label> <input class='form-control' type='text' name='label' id='button'>
-                          <label class='control-label' id=''>Type: </label>
-                          <select class='form-control input-md' id='color'>
-                            <option id='btn-default'>Default</option>
-                            <option id='btn-primary'>Primary</option>
-                            <option id='btn-info'>Info</option>
-                            <option id='btn-success'>Success</option>
-                            <option id='btn-warning'>Warning</option>
-                            <option id='btn-danger'>Danger</option>
-                            <option id='btn-inverse'>Inverse</option>
-                          </select>
-                          <hr/>
-                          <button class='btn btn-info'>Save</button><button class='btn btn-danger'>Cancel</button>
-                        </div>
-                      </form>" data-html="true"
-                      >
-                      <label class="col-md-4 control-label valtype" data-valtype="label">Button</label>
-
-                      <!-- Button -->
-                      <div class="col-md-4 valtype"  data-valtype="button">
-                        <button class='btn btn-success'>Button</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="5">
-                    <textarea id="source" class="col-md-12"></textarea>
-                  </div>
+                   
+                  
                 </fieldset>
               </form>
             </div>
