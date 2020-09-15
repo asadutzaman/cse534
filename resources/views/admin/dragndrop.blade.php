@@ -1,110 +1,117 @@
 @extends('layouts.app')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<style>
+		html,
+		body {
+			max-width: 100%;
+			overflow-x: hidden;
+		}
+
+		.droptarget {
+			float: left;
+			min-height: 100px;
+			min-width: 200px;
+			border: 1px solid black;
+			margin: 15px;
+			padding: 10px;
+			border: 1px solid #aaaaaa;
+		}
+
+		[contentEditable=true]:empty:not(:focus):before {
+			content: attr(data-text);
+		}
+
+		.savedfromclass {
+			min-height: 100px;
+			min-width: 200px;
+			border: 1px solid black;
+		}
+	</style>
 @section('content')
-        <div class="container-fluid">
-            <div class="clearfix"></div>
-            <div class="form_builder">
-                <div class="row" > 
-                    <div class="col-sm-2">
-                        <nav class="nav-sidebar">
-                            <ul class="nav">
-                                <li class="form_bal_textfield">
-                                    <a href="javascript:;">Text Field <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_textarea">
-                                    <a href="javascript:;">Text Area <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_select">
-                                    <a href="javascript:;">Select <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_radio">
-                                    <a href="javascript:;">Radio Button <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_checkbox">
-                                    <a href="javascript:;">Checkbox <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_email">
-                                    <a href="javascript:;">Email <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_number">
-                                    <a href="javascript:;">Number <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_password">
-                                    <a href="javascript:;">Password <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_date">
-                                    <a href="javascript:;">Date <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                                <li class="form_bal_button">
-                                    <a href="javascript:;">Button <i class="fa fa-plus-circle pull-right"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-md-5 bal_builder">
-                        <div class="form_builder_area"></div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="col-md-12">
-                            <form class="form-horizontal">
-                                <div class=""></div>
-                                <div class="form-group plain_html"><textarea rows="50" class="form-control"></textarea></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p ondragstart="dragStart(event)" draggable="true" id="dragtarget"><button>Text input <i
+                        class="fa fa-bars" aria-hidden="true"></i></button></p>
         </div>
+    </div>
+    <div class="ol-md-4">
+        <div id="maincontainer" contenteditable=true data-text="Drop here..." class="droptarget"
+            ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </div>
+    <div class="col-md-5">
+        <div id="savedform" calss="savedfromclass"></div>
+    </div>
 
-        <script>
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            //     }
-            // });
-$(document).ready(function(){
-
-
-
- 
-
- $('#sample_form').on('submit', function(event){
-  event.preventDefault();
-  if($('#action').val() == 'Add')
-  {
-   $.ajax({
-    url:"{{ route('chatbot.store') }}",
-    method:"POST",
-    data: new FormData(this),
-    // data: {"_token": "{{ csrf_token() }}","id": id,"label": label, "answer":answer, "next_action":next_action},
-    contentType: false,
-    cache:false,
-    processData: false,
-    dataType:"json",
-    success:function(data)
-    {
-     var html = '';
-     if(data.errors)
-     {
-      html = '<div class="alert alert-danger">';
-      for(var count = 0; count < data.errors.length; count++)
-      {
-       html += '<p>' + data.errors[count] + '</p>';
-      }
-      html += '</div>';
-     }
-     if(data.success)
-     {
-      html = '<div class="alert alert-success">' + data.success + '</div>';
-      $('#sample_form')[0].reset();
-      $('#user_table').DataTable().ajax.reload();
-     }
-     $('#form_result').html(html);
+</div>
+<script>
+    function dragStart(event) {
+        event.dataTransfer.setData("Text", event.target.id);
     }
-   })
-  }
- });
 
-});
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drop(event) {
+        $("#maincontainer").append("\
+            <div class='form-group col-md-12'>\
+            <label class='control-label'>Node Name:</label> <input class='form-control' type='text' name='label' id='nodeName'>\
+            <label class='control-label' id=''>Select type: </label>\
+            <select class='form-control input-md' id='test' name='form_select' onchange='showDiv(this)'>\
+                <option value='0'>URL</option>\
+                <option value='1'>Message</option>\
+            </select>\
+            <div id='hidden_div' style='display:none;'> <label class='control-label'>Message:</label><input type='text' name='help' id='help' class='form-control'></div>\
+            <label class='control-label'>URL:</label> <input type='text' name='help' id='help' class='form-control'>\
+            <div id='hidden_div'>This is a hidden div</div>\
+            <label class='control-label' id=''>Next Action: </label>\
+            <select class='form-control input-md' id='color'>\
+                <option>Yes</option>\
+                <option>No</option>\
+                <option>Pending</option>\
+            </select>\
+            <hr/>\
+            </div>\
+            <div id='dynamic_field'></div>\
+            <button class='btn btn-info' id='1' onClick='saveform(this.id)'>Save</button><button onClick='cancelForm(this.id)' class='btn btn-danger'>Cancel</button>\
+            <button type='button' onClick='addform(this.id)' class='btn btn-success'>Add More</button>\
+        ");
+    }
+    function addform(clicked_id) {
+        $('#dynamic_field').append('\
+        <label class="control-label">Content</label> <input class="form-control" type="text">\
+        <label class="control-label">URL</label> <input class="form-control" type="text">\
+        <label class="control-label" id="">Next Action: </label>\
+        <select class="form-control input-md">\
+            <option>Yes</option>\
+            <option>No</option>\
+            <option>Pending</option>\
+        </select><hr/>\
+        ');
+    }
+
+    function saveform() {
+        var nodeName = document.getElementById("nodeName").value;
+        $("#savedform").append("&nbsp; <button class='btn btn-info'>" + nodeName);
+        document.getElementById("maincontainer").innerHTML = "";
+    }
+    function showDiv(select){
+        if(select.value==1){
+            document.getElementById('hidden_div').style.display = "block";
+        } else{
+            document.getElementById('hidden_div').style.display = "none";
+        }
+    } 
+    function cancelForm() {
+        document.getElementById("maincontainer").innerHTML = "";
+    }
 </script>
+
+
+</div><!-- /container -->
+
+  
 @endsection
