@@ -106,4 +106,21 @@ class ChatBotController extends Controller
     {
         //
     }
+
+    public function manualdiv(){
+        // $result = "<div id='hidden_div'>This is a hidden div</div>";
+        $result =   "
+                    <label>from DB start</label>
+                    <label class='control-label'>URL:</label> <input type='text' name='help' id='help' class='form-control'>
+                    <div id='hidden_div'>This is a hidden div</div>
+                    <label class='control-label' id=''>Next Action: </label>
+                    <select class='form-control input-md' id='color'>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>Pending</option>
+                    </select>
+                    <label>from DB End</label>
+                    ";
+        return $result;
+    }
 }

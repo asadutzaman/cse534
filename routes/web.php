@@ -21,3 +21,4 @@ Route::get('/dragndrop', function () {
 });
 
 Route::resource('chatbot', 'ChatBotController');
+Route::get('manualdiv', 'ChatBotController@manualdiv');

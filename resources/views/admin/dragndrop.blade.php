@@ -46,6 +46,15 @@
     </div>
 
 </div>
+<div class="row">
+<h3 align="center">Manage Student Details</h3>
+<table border="1" align="center">
+   <tr>
+       <!-- <td> <input type="button" id="display" value="Display All Data" /> </td> -->
+   </tr>
+</table>
+<!-- <div id="responsecontainer" align="center"> -->
+</div>
 <script>
     function dragStart(event) {
         event.dataTransfer.setData("Text", event.target.id);
@@ -66,7 +75,7 @@
             </select>\
             <div id='hidden_div' style='display:none;'> <label class='control-label'>Message:</label><input type='text' name='help' id='help' class='form-control'></div>\
             <label class='control-label'>URL:</label> <input type='text' name='help' id='help' class='form-control'>\
-            <div id='hidden_div'>This is a hidden div</div>\
+            <div id='responsecontainer'></div>\
             <label class='control-label' id=''>Next Action: </label>\
             <select class='form-control input-md' id='color'>\
                 <option>Yes</option>\
@@ -81,16 +90,26 @@
         ");
     }
     function addform(clicked_id) {
-        $('#dynamic_field').append('\
-        <label class="control-label">Content</label> <input class="form-control" type="text">\
-        <label class="control-label">URL</label> <input class="form-control" type="text">\
-        <label class="control-label" id="">Next Action: </label>\
-        <select class="form-control input-md">\
-            <option>Yes</option>\
-            <option>No</option>\
-            <option>Pending</option>\
-        </select><hr/>\
-        ');
+        // $('#dynamic_field').append('\
+        // <label class="control-label">Content</label> <input class="form-control" type="text">\
+        // <label class="control-label">URL</label> <input class="form-control" type="text">\
+        // <label class="control-label" id="">Next Action: </label>\
+        // <select class="form-control input-md">\
+        //     <option>Yes</option>\
+        //     <option>No</option>\
+        //     <option>Pending</option>\
+        // </select><hr/>\
+        // ');
+        $.ajax({    //create an ajax request to display.php
+        type: "GET",
+        url: "manualdiv",
+        dataType: "html",   //expect html to be returned
+        success: function(response){
+            $("#responsecontainer").html(response);
+            //alert(response);
+        }
+
+    });
     }
 
     function saveform() {
@@ -109,7 +128,26 @@
         document.getElementById("maincontainer").innerHTML = "";
     }
 </script>
+<script type="text/javascript">
 
+ $(document).ready(function() {
+
+    $("#display").click(function() {
+
+      $.ajax({    //create an ajax request to display.php
+        type: "GET",
+        url: "manualdiv",
+        dataType: "html",   //expect html to be returned
+        success: function(response){
+            $("#responsecontainer").html(response);
+            //alert(response);
+        }
+
+    });
+});
+});
+
+</script>
 
 </div><!-- /container -->
 
