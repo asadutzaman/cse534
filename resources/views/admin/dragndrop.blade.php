@@ -28,6 +28,9 @@
 		}
 	</style>
 @section('content')
+@php
+header('Access-Control-Allow-Origin: *');
+@endphp
 <div class="container">
 
 <div class="row">
@@ -46,15 +49,6 @@
     </div>
 
 </div>
-<div class="row">
-<h3 align="center">Manage Student Details</h3>
-<table border="1" align="center">
-   <tr>
-       <!-- <td> <input type="button" id="display" value="Display All Data" /> </td> -->
-   </tr>
-</table>
-<!-- <div id="responsecontainer" align="center"> -->
-</div>
 <script>
     function dragStart(event) {
         event.dataTransfer.setData("Text", event.target.id);
@@ -65,56 +59,27 @@
     }
 
     function drop(event) {
-        $("#maincontainer").append("\
-            <div class='form-group col-md-12'>\
-            <label class='control-label'>Node Name:</label> <input class='form-control' type='text' name='label' id='nodeName'>\
-            <label class='control-label' id=''>Select type: </label>\
-            <select class='form-control input-md' id='test' name='form_select' onchange='showDiv(this)'>\
-                <option value='0'>URL</option>\
-                <option value='1'>Message</option>\
-            </select>\
-            <div id='hidden_div' style='display:none;'> <label class='control-label'>Message:</label><input type='text' name='help' id='help' class='form-control'></div>\
-            <label class='control-label'>URL:</label> <input type='text' name='help' id='help' class='form-control'>\
-            <div id='responsecontainer'></div>\
-            <label class='control-label' id=''>Next Action: </label>\
-            <select class='form-control input-md' id='color'>\
-                <option>Yes</option>\
-                <option>No</option>\
-                <option>Pending</option>\
-            </select>\
-            <hr/>\
-            </div>\
-            <div id='dynamic_field'></div>\
-            <button class='btn btn-info' id='1' onClick='saveform(this.id)'>Save</button><button onClick='cancelForm(this.id)' class='btn btn-danger'>Cancel</button>\
-            <button type='button' onClick='addform(this.id)' class='btn btn-success'>Add More</button>\
-        ");
+        
+        $.ajax({
+            url: "https://www.sirajummonir.xyz/bot/form/generic", 
+            success: function(result){
+                $("#maincontainer").html(result);
+            }
+        });
     }
     function addform(clicked_id) {
-        // $('#dynamic_field').append('\
-        // <label class="control-label">Content</label> <input class="form-control" type="text">\
-        // <label class="control-label">URL</label> <input class="form-control" type="text">\
-        // <label class="control-label" id="">Next Action: </label>\
-        // <select class="form-control input-md">\
-        //     <option>Yes</option>\
-        //     <option>No</option>\
-        //     <option>Pending</option>\
-        // </select><hr/>\
-        // ');
-        $.ajax({    //create an ajax request to display.php
-        type: "GET",
-        url: "manualdiv",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-            $("#responsecontainer").html(response);
-            //alert(response);
-        }
-
-    });
+        $.ajax({
+            url: "https://www.sirajummonir.xyz/bot/form/generic", 
+            success: function(result){
+                $("#div1").html(result);
+            }
+        });
     }
 
     function saveform() {
-        var nodeName = document.getElementById("nodeName").value;
-        $("#savedform").append("&nbsp; <button class='btn btn-info'>" + nodeName);
+        alert("t");
+        var title = document.getElementById("title").value;
+        $("#savedform").append("&nbsp; <button class='btn btn-info'>" + title);
         document.getElementById("maincontainer").innerHTML = "";
     }
     function showDiv(select){
@@ -128,26 +93,7 @@
         document.getElementById("maincontainer").innerHTML = "";
     }
 </script>
-<script type="text/javascript">
 
- $(document).ready(function() {
-
-    $("#display").click(function() {
-
-      $.ajax({    //create an ajax request to display.php
-        type: "GET",
-        url: "manualdiv",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-            $("#responsecontainer").html(response);
-            //alert(response);
-        }
-
-    });
-});
-});
-
-</script>
 
 </div><!-- /container -->
 
