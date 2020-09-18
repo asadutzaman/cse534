@@ -22,3 +22,6 @@ Route::get('/dragndrop', function () {
 
 Route::resource('chatbot', 'ChatBotController');
 Route::get('manualdiv', 'ChatBotController@manualdiv');
+Route::get('addform', 'ChatBotController@addform');
+Route::get('media', 'ChatBotController@media');
+Route::post('fromsave', 'ChatBotController@formsave')->name('fromsave');

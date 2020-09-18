@@ -37,7 +37,7 @@ header('Access-Control-Allow-Origin: *');
     <div class="col-md-3">
         <div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
             <p ondragstart="dragStart(event)" draggable="true" id="dragtarget"><button>Text input <i
-                        class="fa fa-bars" aria-hidden="true"></i></button></p>
+            class="fa fa-bars" aria-hidden="true"></i></button></p>
         </div>
     </div>
     <div class="ol-md-4">
@@ -59,29 +59,81 @@ header('Access-Control-Allow-Origin: *');
     }
 
     function drop(event) {
-        
         $.ajax({
-            url: "https://www.sirajummonir.xyz/bot/form/generic", 
-            success: function(result){
-                $("#maincontainer").html(result);
+            type: "GET",
+            url: "manualdiv",
+            dataType: "html",
+            success: function(response){
+                $("#maincontainer").html(response);
             }
         });
     }
     function addform(clicked_id) {
         $.ajax({
-            url: "https://www.sirajummonir.xyz/bot/form/generic", 
+            type: "GET",
+            url: "addform",
+            dataType: "html", 
             success: function(result){
                 $("#div1").html(result);
             }
         });
     }
-
+    function media(clicked_id) {
+        $.ajax({
+            type: "GET",
+            url: "media",
+            dataType: "html", 
+            success: function(result){
+                $("#media").html(result);
+            }
+        });
+    }
     function saveform() {
-        alert("t");
+        // alert("t");
         var title = document.getElementById("title").value;
         $("#savedform").append("&nbsp; <button class='btn btn-info'>" + title);
+        
+        values=$("#sample_form").serialize();//alert(values);
+        $.ajax({
+            url: "fromsave",
+            type: "POST",
+            dataType:"json",
+            data: values,
+            success: function(){
+                alert(result);
+            },
+            error: function(){
+                alert(console.log);
+            }
+        });
         document.getElementById("maincontainer").innerHTML = "";
     }
+    // $(document).ready(function(){
+    //     $('#sample_form').on('submit', function(event){
+    //         event.preventDefault();
+    //         if($('#action').val() == 'Add'){
+    //             $.ajax({
+    //                 url:"{{ route('fromsave') }}",
+    //                 method:"POST",
+    //                 data: new FormData(this),
+    //                 contentType: false,
+    //                 cache:false,
+    //                 processData: false,
+    //                 dataType:"json",
+    //                 success: function(){
+    //                     alert(result);
+    //                 },
+    //                 error: function(){
+    //                     alert(console.log);
+    //                 }
+    //             })
+    //         }
+    //         var title = document.getElementById("title").value;
+    //         $("#savedform").append("&nbsp; <button class='btn btn-info'>" + title);
+    //         document.getElementById("maincontainer").innerHTML = "";
+    //     }
+    // }
+
     function showDiv(select){
         if(select.value==1){
             document.getElementById('hidden_div').style.display = "block";
@@ -92,6 +144,7 @@ header('Access-Control-Allow-Origin: *');
     function cancelForm() {
         document.getElementById("maincontainer").innerHTML = "";
     }
+
 </script>
 
 
