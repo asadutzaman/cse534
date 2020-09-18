@@ -88,6 +88,7 @@ header('Access-Control-Allow-Origin: *');
             }
         });
     }
+    
     function saveform() {
         // alert("t");
         var title = document.getElementById("title").value;
@@ -97,6 +98,9 @@ header('Access-Control-Allow-Origin: *');
         $.ajax({
             url: "fromsave",
             type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             dataType:"json",
             data: values,
             success: function(){
@@ -108,31 +112,6 @@ header('Access-Control-Allow-Origin: *');
         });
         document.getElementById("maincontainer").innerHTML = "";
     }
-    // $(document).ready(function(){
-    //     $('#sample_form').on('submit', function(event){
-    //         event.preventDefault();
-    //         if($('#action').val() == 'Add'){
-    //             $.ajax({
-    //                 url:"{{ route('fromsave') }}",
-    //                 method:"POST",
-    //                 data: new FormData(this),
-    //                 contentType: false,
-    //                 cache:false,
-    //                 processData: false,
-    //                 dataType:"json",
-    //                 success: function(){
-    //                     alert(result);
-    //                 },
-    //                 error: function(){
-    //                     alert(console.log);
-    //                 }
-    //             })
-    //         }
-    //         var title = document.getElementById("title").value;
-    //         $("#savedform").append("&nbsp; <button class='btn btn-info'>" + title);
-    //         document.getElementById("maincontainer").innerHTML = "";
-    //     }
-    // }
 
     function showDiv(select){
         if(select.value==1){

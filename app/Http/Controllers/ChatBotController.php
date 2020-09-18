@@ -109,11 +109,13 @@ class ChatBotController extends Controller
 
     public function manualdiv(){
         // $result = "<div id='hidden_div'>This is a hidden div</div>";
+        // <input type='hidden' name='_method' value='POST'>
         $result =   "
                     
-            <form name='node' id='node' method='post' class='form-horizontal' enctype='multipart/form-data'>
+            <form method='post' name='node' id='node' class='form-horizontal' enctype='multipart/form-data'>
             
-            @csrf
+            <input type='hidden' name='_token' id='csrf-token' value='csrf_token() ' />
+            
             <fieldset>
             <div class='form-group'>
                 <label for='media'>Image</label>
@@ -275,7 +277,8 @@ class ChatBotController extends Controller
         return $result;
     }
 
-    public function formsave(){
-        return "ok";
+    public function formsave(Request $request){
+        // return "ok";
+        dd($request);
     }
 }
