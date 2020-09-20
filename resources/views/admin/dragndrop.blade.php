@@ -61,7 +61,7 @@ header('Access-Control-Allow-Origin: *');
     function drop(event) {
         $.ajax({
             type: "GET",
-            url: "manualdiv",
+            url: "http://127.0.0.1:8000/manualdiv",
             dataType: "html",
             success: function(response){
                 $("#maincontainer").html(response);
@@ -88,13 +88,14 @@ header('Access-Control-Allow-Origin: *');
             }
         });
     }
-    
+
     function saveform() {
         // alert("t");
         var title = document.getElementById("title").value;
         $("#savedform").append("&nbsp; <button class='btn btn-info'>" + title);
         
         values=$("#sample_form").serialize();//alert(values);
+        alert(values);
         $.ajax({
             url: "fromsave",
             type: "POST",
@@ -110,6 +111,9 @@ header('Access-Control-Allow-Origin: *');
                 alert(console.log);
             }
         });
+
+
+        
         document.getElementById("maincontainer").innerHTML = "";
     }
 

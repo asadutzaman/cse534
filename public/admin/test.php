@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+<!-- https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc/related -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
@@ -11,18 +11,15 @@
 	<title>UltrasBot</title>
 
 	<!-- Bootstrap core CSS -->
-	<!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
 	<link href="css/simple-sidebar.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    
+    	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> -->
 	<style>
 		html,
 		body {
@@ -57,7 +54,7 @@
 
 		<!-- Sidebar -->
 		<div class="bg-light border-right" id="sidebar-wrapper">
-			<div class="sidebar-heading">test </div>
+			<div class="sidebar-heading">UltrasBot </div>
 			<div class="list-group list-group-flush">
 				<a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
 				<a href="#" class="list-group-item list-group-item-action bg-light">Messages</a>
@@ -133,81 +130,91 @@
     }
 
     function drop(event) {
-        var response = '';
-        $.ajax({ type: "GET",   
-                url: "http://www.google.de",   
-                async: false,
-                success : function(text)
-                {
-                    response = text;
-                }
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/manualdiv",
+            dataType: "html",
+            success: function(response){
+                $("#maincontainer").html(response);
+            }
         });
-
-        alert(response);
     }
-    // function addform(clicked_id) {
-    //     $.ajax({
-    //         type: "GET",
-    //         url: "addform",
-    //         dataType: "html", 
-    //         success: function(result){
-    //             $("#div1").html(result);
-    //         }
-    //     });
-    // }
-    // function media(clicked_id) {
-    //     $.ajax({
-    //         type: "GET",
-    //         url: "media",
-    //         dataType: "html", 
-    //         success: function(result){
-    //             $("#media").html(result);
-    //         }
-    //     });
-    // }
+    function addform(clicked_id) {
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/addform",
+            dataType: "html", 
+            success: function(result){
+                $("#div1").html(result);
+            }
+        });
+    }
+    function media(clicked_id) {
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/media",
+            dataType: "html", 
+            success: function(result){
+                $("#media").html(result);
+            }
+        });
+    }
     
-    // function saveform() {
-    //     // alert("t");
-    //     var title = document.getElementById("title").value;
-    //     $("#savedform").append("&nbsp; <button class='btn btn-info'>" + title);
-        
-    //     values=$("#sample_form").serialize();//alert(values);
-    //     $.ajax({
-    //         url: "fromsave",
-    //         type: "POST",
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         },
-    //         dataType:"json",
-    //         data: values,
-    //         success: function(){
-    //             alert(result);
-    //         },
-    //         error: function(){
-    //             alert(console.log);
-    //         }
-    //     });
-    //     document.getElementById("maincontainer").innerHTML = "";
-    // }
+	function saveform() {
+		
+			var title = document.getElementById("title").value;
+			var subtitle = document.getElementById("subtitle").value;
+			var url = document.getElementsByName('url').value;
+			var type = document.getElementsByName('type').value;
+			var action = document.getElementsByName('action').value;
+			   
+           	if(title === "" || subtitle === "" || url === "" || type === "" || action === ""){
+				alert("You have to give value to all the field");
+				$("#node").submit(function(e) {
+						e.preventDefault();
+					});
+			} 
+           	else {
+				
+				$("#savedform").append("&nbsp; <button class='btn btn-info'>" + title);
 
-    // function showDiv(select){
-    //     if(select.value==1){
-    //         document.getElementById('hidden_div').style.display = "block";
-    //     } else{
-    //         document.getElementById('hidden_div').style.display = "none";
-    //     }
-    // } 
-    // function cancelForm() {
-    //     document.getElementById("maincontainer").innerHTML = "";
-    // }
+				
+				values=$("#node").serialize();//alert(values);
+				$.ajax({
+					url: "http://127.0.0.1:8000/fromsave",
+					type: "POST",
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					},
+					dataType:"json",
+					data: values,
+					success: function(){
+						alert(result);
+					},
+					error: function(){
+						alert(console.log);
+					}
+				});
+				document.getElementById("maincontainer").innerHTML = "";
+				
+		   }
+    }
+
+    function showDiv(select){
+        if(select.value==1){
+            document.getElementById('hidden_div').style.display = "block";
+        } else{
+            document.getElementById('hidden_div').style.display = "none";
+        }
+    } 
+    function cancelForm() {
+        document.getElementById("maincontainer").innerHTML = "";
+    }
 
 </script>
 
-
-</div><!-- /container -->
-
-			<!-- Bootstrap core JavaScript -->
-			
+</div>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>	
 </body>
 
 </html>

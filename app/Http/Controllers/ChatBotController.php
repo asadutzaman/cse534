@@ -112,7 +112,7 @@ class ChatBotController extends Controller
         // <input type='hidden' name='_method' value='POST'>
         $result =   "
                     
-            <form method='post' name='node' id='node' class='form-horizontal' enctype='multipart/form-data'>
+            <form id='node'>
             
             <input type='hidden' name='_token' id='csrf-token' value='csrf_token() ' />
             
@@ -130,12 +130,12 @@ class ChatBotController extends Controller
 
             <div class='form-group'>
                 <label for='subtitle'>Subtitle</label>
-                <input type='text' id='title1' name='subtitle[]' class='form-control'>
+                <input type='text' id='subtitle' name='subtitle[]' class='form-control'>
             </div>
 
             <div class='form-group'>
                 <label for='url'>Default URL</label>
-                <input type='text' id='defaulturl' name='url[]' class='form-control'>
+                <input type='text' id='url' name='url[]' class='form-control'>
             </div>
 
             <div id='media'></div>
@@ -171,7 +171,7 @@ class ChatBotController extends Controller
             </fieldset>
             <div id='div1'></div>
             <i class='fa fa-plus-circle' onClick='addform(this.id)' id='addBtn' aria-hidden='true'></i>
-            <button type='submit' onClick='saveform(this.id)' class='btn btn-primary'>SAVE</button>
+            <input type='submit' onClick='saveform(this.id)' name='action_button' id='action_button' class='btn btn-warning' value='Add' />
             </form>
                     ";
         return $result;

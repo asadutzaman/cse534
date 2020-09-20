@@ -19,7 +19,9 @@ Route::get('/', function () {
 Route::get('/dragndrop', function () {
     return view('admin.dragndrop');
 });
-
+Route::get('/test', function () {
+    return view('admin.test');
+});
 Route::resource('chatbot', 'ChatBotController');
 Route::get('manualdiv', 'ChatBotController@manualdiv');
 Route::get('addform', 'ChatBotController@addform');

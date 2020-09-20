@@ -18,7 +18,7 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    
+    	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<style>
 		html,
@@ -161,17 +161,23 @@
     }
     
 	function saveform() {
-		var title = document.getElementById("title").value;
-        	var name = $('#title').val();  
-           var message = $('#message').val();  
-           if(name == '' || message == '')  
-           {  
-                alert("You have to give value to all the field");
-           }  
-           else  
-           {
+		
+			var title = document.getElementById("title").value;
+			var subtitle = document.getElementById("subtitle").value;
+			var url = document.getElementsByName('url').value;
+			var type = document.getElementsByName('type').value;
+			var action = document.getElementsByName('action').value;
+			   
+           	if(title === "" || subtitle === "" || url === "" || type === "" || action === ""){
+				alert("You have to give value to all the field");
+				$("#node").submit(function(e) {
+						e.preventDefault();
+					});
+			} 
+           	else {
 				
 				$("#savedform").append("&nbsp; <button class='btn btn-info'>" + title);
+
 				
 				values=$("#node").serialize();//alert(values);
 				$.ajax({
@@ -190,6 +196,7 @@
 					}
 				});
 				document.getElementById("maincontainer").innerHTML = "";
+				
 		   }
     }
 
